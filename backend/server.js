@@ -1,13 +1,11 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const app = express();
 app.use(cors({
   origin: 'https://test-mailer-frontend.onrender.com',
   methods: ['GET', 'POST'],
 }));
-
-
-const app = express();
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.use(express.json());
 
