@@ -6,15 +6,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configure your SMTP transporter (Gmail, Outlook, or Mailtrap for testing)
-//const transporter = nodemailer.createTransport({
- // service: 'gmail', // or 'hotmail' for Outlook
- // auth: {
- //   user: 'umeshkumar0509@gmail.com', // set in environment variables
- //   pass: 'pduq qfdn ofdm iaco'  // set in environment variables
- // }
-//});
-
 const transporter = nodemailer.createTransport({
   service: 'gmail', // or 'hotmail' for Outlook
   auth: {
