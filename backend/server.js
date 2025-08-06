@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
@@ -28,6 +28,10 @@ app.post('/send-email', async (req, res) => {
     console.error('Email send error:', err);
     res.status(500).json({ success: false, error: err.message });
   }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
