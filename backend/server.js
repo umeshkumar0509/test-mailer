@@ -1,16 +1,14 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+
 const app = express();
-app.use(cors({
-  origin: 'https://test-mailer-frontend.onrender.com',
-  methods: ['GET', 'POST'],
-}));
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(cors());
 app.use(express.json());
 
+
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // or 'hotmail' for Outlook
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -31,10 +29,6 @@ app.post('/send-email', async (req, res) => {
     console.error('Email send error:', err);
     res.status(500).json({ success: false, error: err.message });
   }
-});
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
